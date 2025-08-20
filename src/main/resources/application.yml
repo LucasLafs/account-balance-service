@@ -1,0 +1,39 @@
+server:
+  port: 7050
+
+spring:
+  config:
+    import:
+      - classpath:config-springdoc.yml
+      - optional:file:./secrets-local.properties
+  application:
+    name: account-balance-service
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: America/Sao_Paulo
+  datasource:
+    url: ${database.url}
+    username: ${database.username}
+    password: ${database.password}
+    hikari:
+      maximum-pool-size: 10
+      data-source-properties:
+        reWriteBatchedInserts: true
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        ddl-auto: none
+        generate-statistics: false
+        format_sql: false
+        jdbc:
+          batch-size: 25
+        order-inserts: true
+    open-in-view: false
+
+logging:
+  level:
+    root: INFO

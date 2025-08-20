@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:15
+    container_name: account_balance_service_postgres
+    environment:
+      POSTGRES_USER: account_balance_service
+      POSTGRES_PASSWORD: account_balance_service
+      POSTGRES_DB: account_balance_service
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - pg-net
+
+networks:
+  pg-net:
+    driver: bridge
