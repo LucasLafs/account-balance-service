@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  title: Account Balance Service API
+  description: API for checking and updating bank account balances
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:7050
+    description: Local server
+
+tags:
+  - name: account balance service
+
+paths:
+  /balances/{accountId}:
+    get:
+      summary: Consult account balance
+      operationId: getAccountBalance
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Retrieve balance successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalanceResponse'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseErrorResponse'
+      tags:
+        - AccountBalance
+
+components:
+  schemas:
+    BalanceObject:
+      type: object
+      properties:
+        amount:
+          description: Represents of a monetary value
+          type: number
+          format: double
+          example: 183.12
+        currency:
+          description: Currency code according to ISO4217
+          type: string
+      required:
+        - amount
+        - currency
+    BaseErrorResponse:
+      title: BaseErrorResponse
+      type: object
+      properties:
+        type:
+          type: string
+          example: EXCEPTION
+        message:
+          type: string
+          example: Some error
+    AccountBalanceResponse:
+      title: AccountBalanceResponse
+      description: The entity represents the current balance of account
+      type: object
+      properties:
+        id:
+          description: Represents the account identifier id
+          type: string
+        owner:
+          description: Represents the account holder identifier id
+          type: string
+        balance:
+          description:
+          $ref: '#/components/schemas/BalanceObject'
+        updated_at:
+          description: Represents the timestamp in offset date time format according to ISO8601
+          type: string
+          format: date-time
+          example: "2025-07-05T18:04:13.433-03:00"
+      required:
+        - id
+        - owner
+        - balance
+        - updated_at
