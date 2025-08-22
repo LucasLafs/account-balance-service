@@ -246,7 +246,9 @@ dependencies {
     integrationTestImplementation("org.awaitility:awaitility-kotlin:4.2.0")
 
     // SQS Integration Test
-//    integrationTestImplementation("org.elasticmq:elasticmq-rest-sqs_2.13:1.6.11")
+    integrationTestImplementation("org.elasticmq:elasticmq-rest-sqs_2.13:1.6.11")
+    integrationTestImplementation("software.amazon.awssdk:sqs")
+    integrationTestImplementation("org.springframework.boot:spring-boot-starter-activemq")
 
     // HTTP Integration Test
     integrationTestImplementation("org.springframework.cloud:spring-cloud-contract-wiremock")
