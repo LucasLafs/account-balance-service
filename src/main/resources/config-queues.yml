@@ -1,0 +1,5 @@
+app:
+  queue:
+    financial-transactions-processed:
+      name: "transacoes-financeiras-processadas-sqs"
+      enabled: true

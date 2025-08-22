@@ -21,7 +21,6 @@ replay_pid*
 .kotlin/
 .gradle/
 gradle/
-.gitattributes
 build/
 bin/
 .idea

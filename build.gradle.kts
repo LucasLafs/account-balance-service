@@ -209,21 +209,15 @@ dependencies {
     implementation("org.flywaydb:flyway-core:9.0.4")
     runtimeOnly("org.postgresql:postgresql")
 
-    // Security
-//    implementation("org.springframework.boot:spring-boot-starter-security")
-
     // Observability
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-//    runtimeOnly("io.micrometer:micrometer-tracing-bridge-brave")
-//    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
-//    runtimeOnly("io.github.openfeign:feign-micrometer")
+    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 
     // Resilience
     implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
 
-    // Others
-//    implementation("de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.3.0")
-//    implementation("com.jayway.jsonpath:json-path:2.9.0")
+    // SQS
+    implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs:3.1.0")
 
     // Cache
     implementation("org.springframework.boot:spring-boot-starter-cache")
@@ -237,9 +231,6 @@ dependencies {
     // Unit Test utils
     testImplementation("io.mockk:mockk:1.12.4")
     testImplementation("org.assertj:assertj-core:3.23.1")
-
-    // Schema validator
-//    implementation("com.networknt:json-schema-validator:1.0.86")
 
     // Arch Test
     archTestImplementation("com.tngtech.archunit:archunit-junit5-api:1.2.1")

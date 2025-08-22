@@ -9,6 +9,8 @@ resilience4j.circuitbreaker:
   instances:
     resource-jpa-cb:
       baseConfig: default
+    jms-listener-account-balance-cb:
+      baseConfig: default
 
 resilience4j.retry:
   configs:

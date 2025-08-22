@@ -11,12 +11,14 @@ import jakarta.persistence.Table
 import org.springframework.data.domain.Persistable
 import java.math.BigDecimal
 import java.time.OffsetDateTime
+import java.util.Currency
 
 @Entity(name = "Transactions")
 @Table(name = "transactions")
 data class TransactionTable(
     @Id
     val transactionId: String,
+    val accountId: String,
 
     @Enumerated(EnumType.STRING)
     val type: TransactionType,
@@ -38,10 +40,11 @@ data class TransactionTable(
 fun Transaction.toTable(isNew: Boolean = true): TransactionTable {
     return TransactionTable(
         transactionId = id,
+        accountId = accountId,
         type = type,
         status = status,
         amount = amount,
-        currency = currency,
+        currency = currency.toString(),
         createdAt = createdAt,
         new = isNew
     )
@@ -50,10 +53,11 @@ fun Transaction.toTable(isNew: Boolean = true): TransactionTable {
 fun TransactionTable.toEntity(): Transaction {
     return Transaction(
         id = transactionId,
+        accountId = accountId,
         type = type,
         status = status,
         amount = amount,
-        currency = currency,
+        currency = Currency.getInstance(currency),
         createdAt = createdAt
     )
 }

@@ -10,7 +10,7 @@ data class AccountBalance(
     val status: AccountStatus,
     val balance: Balance,
     val createdAt: OffsetDateTime,
-    val updatedAt: OffsetDateTime
+    val updatedAt: OffsetDateTime = OffsetDateTime.now()
 )
 
 data class Balance(
