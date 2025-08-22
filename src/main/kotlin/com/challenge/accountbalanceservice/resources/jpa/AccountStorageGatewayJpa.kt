@@ -4,7 +4,6 @@ import com.challenge.accountbalanceservice.domain.entities.AccountBalance
 import com.challenge.accountbalanceservice.domain.gateways.AccountStorageGateway
 import com.challenge.accountbalanceservice.resources.repositories.AccountJpaRepository
 import com.challenge.accountbalanceservice.resources.repositories.tables.toEntity
-import com.challenge.accountbalanceservice.resources.repositories.tables.toTable
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
@@ -13,21 +12,8 @@ import kotlin.jvm.optionals.getOrNull
 @Component
 @Transactional(readOnly = true)
 class AccountStorageGatewayJpa(
-    private val accountRepository: AccountJpaRepository,
-    private val transactionRepository: AccountJpaRepository
+    private val accountRepository: AccountJpaRepository
 ) : AccountStorageGateway {
-
-    @CircuitBreaker(name = "resource-jpa-cb")
-    @Transactional
-    override fun insert(accountBalance: AccountBalance) {
-        accountRepository.save(accountBalance.toTable(isNew = true))
-    }
-
-    @CircuitBreaker(name = "resource-jpa-cb")
-    @Transactional
-    override fun update(accountBalance: AccountBalance) {
-        accountRepository.save(accountBalance.toTable(isNew = false))
-    }
 
     @CircuitBreaker(name = "resource-jpa-cb")
     override fun findById(id: String): AccountBalance? {

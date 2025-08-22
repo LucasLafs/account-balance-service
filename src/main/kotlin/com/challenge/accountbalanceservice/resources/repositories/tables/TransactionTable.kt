@@ -8,7 +8,6 @@ import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import org.springframework.data.domain.Persistable
 import java.math.BigDecimal
 import java.time.OffsetDateTime
 import java.util.Currency
@@ -28,31 +27,24 @@ data class TransactionTable(
 
     val amount: BigDecimal,
     val currency: String,
-    val createdAt: OffsetDateTime,
+    val createdAt: OffsetDateTime
+)
 
-    @Transient
-    val new: Boolean
-) : Persistable<String> {
-    override fun isNew() = new
-    override fun getId() = transactionId
-}
-
-fun Transaction.toTable(isNew: Boolean = true): TransactionTable {
+fun Transaction.toTable(): TransactionTable {
     return TransactionTable(
-        transactionId = id,
+        transactionId = transactionId,
         accountId = accountId,
         type = type,
         status = status,
         amount = amount,
         currency = currency.toString(),
-        createdAt = createdAt,
-        new = isNew
+        createdAt = createdAt
     )
 }
 
 fun TransactionTable.toEntity(): Transaction {
     return Transaction(
-        id = transactionId,
+        transactionId = transactionId,
         accountId = accountId,
         type = type,
         status = status,

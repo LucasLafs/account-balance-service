@@ -48,7 +48,7 @@ fun FinancialTransactionDto.toDomain(): FinancialTransaction {
 
 fun TransactionDto.toDomain(accountId: String): Transaction {
     return Transaction(
-        id = id,
+        transactionId = id,
         accountId = accountId,
         type = type,
         status = status,
@@ -60,7 +60,7 @@ fun TransactionDto.toDomain(accountId: String): Transaction {
 
 fun AccountDto.toDomain(): AccountBalance {
     return AccountBalance(
-        id = id,
+        accountId = id,
         owner = owner,
         status = status,
         balance = balance.toDomain(),

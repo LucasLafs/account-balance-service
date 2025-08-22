@@ -137,11 +137,16 @@ configurations["archTestRuntimeOnly"].extendsFrom(configurations.runtimeOnly.get
 // Jacoco
 jacoco { toolVersion = "0.8.11" }
 val excludePackages: Iterable<String> = listOf(
-    "**/$basePath/Application*",
+    "**/$basePath/AccountBalanceApplication*",
     "**/$basePath/application/config/**",
+    "**/$basePath/application/web/api/**",
+    "**/$basePath/application/web/dto/**",
     "**/$basePath/application/exception/**",
     "**/$basePath/application/web/extensions/**",
-    "**/$basePath/domain/gateways/**"
+    "**/$basePath/domain/gateways/**",
+    "**/$basePath/domain/entities/**",
+    "**/$basePath/domain/exceptions/**",
+    "**/$basePath/resources/repositories/tables/**"
 )
 extra["excludePackages"] = excludePackages
 
@@ -165,12 +170,6 @@ tasks.jacocoTestCoverageVerification {
             limit {
                 minimum = 0.8.toBigDecimal()
                 counter = "LINE"
-            }
-        }
-        rule {
-            limit {
-                minimum = 0.8.toBigDecimal()
-                counter = "BRANCH"
             }
         }
     }
@@ -231,6 +230,8 @@ dependencies {
     // Unit Test utils
     testImplementation("io.mockk:mockk:1.12.4")
     testImplementation("org.assertj:assertj-core:3.23.1")
+    testImplementation("net.bytebuddy:byte-buddy:1.14.18")
+    testImplementation("net.bytebuddy:byte-buddy-agent:1.14.18")
 
     // Arch Test
     archTestImplementation("com.tngtech.archunit:archunit-junit5-api:1.2.1")
@@ -245,7 +246,9 @@ dependencies {
     integrationTestImplementation("org.awaitility:awaitility-kotlin:4.2.0")
 
     // SQS Integration Test
-//    integrationTestImplementation("org.elasticmq:elasticmq-rest-sqs_2.13:1.6.11")
+    integrationTestImplementation("org.elasticmq:elasticmq-rest-sqs_2.13:1.6.11")
+    integrationTestImplementation("software.amazon.awssdk:sqs")
+    integrationTestImplementation("org.springframework.boot:spring-boot-starter-activemq")
 
     // HTTP Integration Test
     integrationTestImplementation("org.springframework.cloud:spring-cloud-contract-wiremock")

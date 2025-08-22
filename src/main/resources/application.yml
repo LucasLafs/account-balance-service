@@ -5,6 +5,7 @@ spring:
   config:
     import:
       - classpath:config-springdoc.yml
+      - classpath:config-queues.yml
       - classpath:config-resilience.yml
       - optional:file:./secrets-local.properties
   application:
