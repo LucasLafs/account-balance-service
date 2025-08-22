@@ -7,7 +7,7 @@ import com.challenge.accountbalanceservice.domain.entities.Balance
 
 fun AccountBalance.toDto(): AccountBalanceResponseDto {
     return AccountBalanceResponseDto(
-        id,
+        accountId,
         owner,
         balance.toDto(),
         updatedAt

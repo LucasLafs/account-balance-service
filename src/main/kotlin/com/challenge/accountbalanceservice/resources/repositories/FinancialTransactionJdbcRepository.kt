@@ -10,15 +10,15 @@ import java.sql.Statement.SUCCESS_NO_INFO
 
 @Repository
 class FinancialTransactionJdbcRepository(
-    private val meterRegistry: MeterRegistry,
-    private val jdbcTemplate: NamedParameterJdbcTemplate
+    private val jdbcTemplate: NamedParameterJdbcTemplate,
+    private val meterRegistry: MeterRegistry
 ) {
     fun insertOrUpdate(
         accountTables: List<AccountTable>,
         transactionTables: List<TransactionTable>
     ) {
         val uniqueAccountTables = accountTables
-            .groupBy { it.id }
+            .groupBy { it.accountId }
             .map { (_, accounts) ->
                 accounts.maxByOrNull { it.updatedAt }!!
             }
@@ -47,7 +47,7 @@ class FinancialTransactionJdbcRepository(
     }
 
     private fun mapOfAccountInsertsSqlParameterSource(row: AccountTable) = MapSqlParameterSource().apply {
-        addValue("account_id", row.id)
+        addValue("account_id", row.accountId)
         addValue("owner", row.owner)
         addValue("status", row.status.name)
         addValue("amount", row.amount)
