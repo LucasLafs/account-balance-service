@@ -13,23 +13,24 @@ import kotlin.jvm.optionals.getOrNull
 @Component
 @Transactional(readOnly = true)
 class AccountStorageGatewayJpa(
-    private val repository: AccountJpaRepository
+    private val accountRepository: AccountJpaRepository,
+    private val transactionRepository: AccountJpaRepository
 ) : AccountStorageGateway {
 
     @CircuitBreaker(name = "resource-jpa-cb")
     @Transactional
     override fun insert(accountBalance: AccountBalance) {
-        repository.save(accountBalance.toTable(isNew = true))
+        accountRepository.save(accountBalance.toTable(isNew = true))
     }
 
     @CircuitBreaker(name = "resource-jpa-cb")
     @Transactional
     override fun update(accountBalance: AccountBalance) {
-        repository.save(accountBalance.toTable(isNew = false))
+        accountRepository.save(accountBalance.toTable(isNew = false))
     }
 
     @CircuitBreaker(name = "resource-jpa-cb")
     override fun findById(id: String): AccountBalance? {
-        return repository.findById(id).getOrNull()?.toEntity()
+        return accountRepository.findById(id).getOrNull()?.toEntity()
     }
 }
