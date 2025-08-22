@@ -5,9 +5,19 @@ spring:
   config:
     import:
       - classpath:config-springdoc.yml
+      - classpath:config-resilience.yml
       - optional:file:./secrets-local.properties
   application:
     name: account-balance-service
+  cloud:
+    aws:
+      region:
+        static: sa-east-1
+      credentials:
+        access-key: test
+        secret-key: test
+      sqs:
+        endpoint: http://localhost:4566
   jackson:
     property-naming-strategy: SNAKE_CASE
     serialization:
@@ -33,6 +43,18 @@ spring:
           batch-size: 25
         order-inserts: true
     open-in-view: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    enable:
+      all: true
 
 logging:
   level:
