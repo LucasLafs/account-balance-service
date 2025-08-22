@@ -5,7 +5,7 @@ import java.time.OffsetDateTime
 import java.util.Currency
 
 data class AccountBalance(
-    val id: String,
+    val accountId: String,
     val owner: String,
     val status: AccountStatus,
     val balance: Balance,

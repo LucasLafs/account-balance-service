@@ -1,5 +1,8 @@
 app:
   queue:
-    financial-transactions-processed:
-      name: "transacoes-financeiras-processadas-sqs"
+    financial-transaction-processed:
+      name: "transacoes-financeiras-processadas"
       enabled: true
+      dlq:
+        name: "transacoes-financeiras-processadas-dlq"
+        reprocess: false
