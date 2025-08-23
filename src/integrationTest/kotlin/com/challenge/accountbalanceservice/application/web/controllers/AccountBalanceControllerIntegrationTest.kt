@@ -26,7 +26,7 @@ internal class AccountBalanceControllerIntegrationTest : BaseIntegrationTest() {
         Given {
             headers(defaultHeaders)
         } When {
-            get("/balances/$accountId")
+            get("/accounts/$accountId/balance")
         } Then {
             statusCode(HttpStatus.SC_OK)
 
@@ -45,7 +45,7 @@ internal class AccountBalanceControllerIntegrationTest : BaseIntegrationTest() {
         Given {
             headers(defaultHeaders)
         } When {
-            get("/balances/$accountId")
+            get("/accounts/$accountId/balance")
         } Then {
             statusCode(HttpStatus.SC_NOT_FOUND)
 

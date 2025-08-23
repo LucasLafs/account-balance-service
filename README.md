@@ -57,19 +57,27 @@ Após iniciar, a aplicação irá consumir automaticamente as mensagens geradas 
 O endpoint REST para consulta de saldo estará disponível em http://localhost:7050. Parametro para consulta é o id da conta
 
 ```bash
-curl --location 'http://localhost:7050/balances/97a331dc-16f4-4fd7-88e1-923d1d216eb4'
+curl --location 'http://localhost:7050/accounts/97a331dc-16f4-4fd7-88e1-923d1d216eb4/balance'
 ```
 
 ### Observabilidade
 
 Métricas habilitadas via Spring Boot Actuator.
-Métricas Prometheus disponíveis em /actuator/prometheus.
-Dashboards podem ser criados no Grafana acessando http://localhost:3000.
+Métricas Prometheus disponíveis em http://localhost:9090/query.
+Dashboards podem ser criados no Grafana acessando http://localhost:3000/.
 
 ### Credenciais
-Grafana: admin / admin
-Postgres: configuração padrão local (ajustável no docker-compose)
-LocalStack: sem autenticação, endpoints simulados via localhost:4566
+App: Autenticação ainda não implementada
+
+Grafana: admin / admin (ajustável no docker-compose)
+
+Postgres: Configuração padrão local (ajustável no docker-compose)
+
+```bash
+docker exec -it account_balance_service_postgres psql -U account_balance_service -d account_balance_service
+```
+
+Localstack: sem autenticação, endpoints simulados via http://localhost:4566
 
 ## TRADEOFF
 
