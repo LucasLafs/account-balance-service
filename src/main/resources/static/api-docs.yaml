@@ -12,7 +12,7 @@ tags:
   - name: account balance service
 
 paths:
-  /balances/{accountId}:
+  /accounts/{accountId}/balance:
     get:
       summary: Consult account balance
       operationId: getAccountBalance
