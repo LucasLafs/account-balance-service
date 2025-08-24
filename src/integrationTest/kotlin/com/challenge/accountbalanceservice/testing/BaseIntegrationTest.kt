@@ -50,7 +50,7 @@ abstract class BaseIntegrationTest {
         LOG.info("Queue created: $queueUrl")
     }
 
-    protected fun sendTestMessage(messages: String) {
+    protected fun sendMessage(messages: String) {
         sqsTemplate.send(queueName, messages)
     }
 

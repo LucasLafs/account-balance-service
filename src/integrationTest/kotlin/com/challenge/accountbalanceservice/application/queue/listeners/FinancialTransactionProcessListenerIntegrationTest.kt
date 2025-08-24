@@ -30,9 +30,9 @@ internal class FinancialTransactionProcessListenerIntegrationTest : BaseIntegrat
         secondMessage.set("transaction.id", "8e8ae808-b154-48b5-9f3e-553935cc4544")
         thirdMessage.set("transaction.id", "8e8ae808-b154-48b5-9f3e-553935cc4545")
 
-        sendTestMessage(firstMessage.jsonString())
-        sendTestMessage(secondMessage.jsonString())
-        sendTestMessage(thirdMessage.jsonString())
+        sendMessage(firstMessage.jsonString())
+        sendMessage(secondMessage.jsonString())
+        sendMessage(thirdMessage.jsonString())
 
         await.atMost(Duration.ofSeconds(10)).untilAsserted {
             val accountBalance = accountStorageGateway.findById(accountId)
@@ -55,9 +55,9 @@ internal class FinancialTransactionProcessListenerIntegrationTest : BaseIntegrat
 
         thirdMessage.set("transaction.id", "8e8ae808-b154-48b5-9f3e-553935cc4545")
 
-        sendTestMessage(firstMessage.jsonString())
-        sendTestMessage(secondMessage.jsonString())
-        sendTestMessage(thirdMessage.jsonString())
+        sendMessage(firstMessage.jsonString())
+        sendMessage(secondMessage.jsonString())
+        sendMessage(thirdMessage.jsonString())
 
         await.atMost(Duration.ofSeconds(10)).untilAsserted {
             val accountBalance = accountStorageGateway.findById(accountId)
