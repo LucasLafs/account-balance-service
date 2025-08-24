@@ -1,10 +1,10 @@
 # Account Balance Service
 
-Serviço responsável por consultar saldos de contas e processar transações financeiras, implementado com arquitetura hexagonal.
+Serviço responsável por processar transações financeiras e consulta de saldo da conta.
 
 ## Descrição
 
-O serviço disponibiliza um endpoint REST para consulta de saldo de contas e processa automaticamente transações financeiras enviadas para uma fila SQS simulada pelo LocalStack. Mensagens geradas pelo message-generator são consumidas e processadas em tempo real.
+O serviço processa automaticamente transações financeiras enviadas para uma fila SQS simulada pelo LocalStack e disponibiliza um endpoint REST para consulta de saldo de conta. Mensagens geradas pelo message-generator são consumidas e processadas em tempo real.
 
 ## Funcionalidade principal
 
