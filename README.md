@@ -55,10 +55,11 @@ Aguarde o message-generator finalizar a geração de mensagens antes de subir a 
 Após iniciar, a aplicação irá consumir automaticamente as mensagens geradas pelo message-generator na fila do LocalStack e processá-las.
 
 O endpoint REST para consulta de saldo estará disponível em http://localhost:7050. Parametro para consulta é o id da conta
-
 ```bash
 curl --location 'http://localhost:7050/accounts/97a331dc-16f4-4fd7-88e1-923d1d216eb4/balance'
 ```
+
+A documentação está disponivel em http://localhost:7050/swagger-ui/index.html.
 
 ### Observabilidade
 
@@ -99,13 +100,13 @@ A stack também permite a criação de dashboards e alertas personalizados, ofer
 
 ### Processamento de mensagens
 
-O método escolhido foi um processamento de lotes de mensagens também adicionando multiplos consumidores através do SQSListener e também de inserção em lotes na base de dados para melhor perfomance.
-Com mais tempo, poderia adicionar as corrotinas do Kotlin, que permitem paralelismo leve sobre a jvm que podem ser muito mais escaladas do que threads convencionais.
-Também gostaria de ter adicionado meu próprio fluxo de fila para controle maior de cada transação e reprocessamento se necessario.
+Processamento de lotes de mensagens, adicionando multiplos consumidores através do SQSListener em conjunto com a inserção em lotes na base de dados para melhor perfomance.
+Poderia adicionar corrotinas, que permitem paralelismo leve sobre a jvm que podem ser muito mais escaladas do que threads convencionais.
+Também adicionar o próprio fluxo de fila interna na aplicação para controle maior de cada transação e reprocessamento se necessario.
 
 ### Implantação em cloud
 
-Utilizaria de um CI/CD como esteira com alguns steps principais de validação para mitigação de riscos.
+CI/CD como esteira com alguns steps principais de validação para mitigação de riscos.
 
 Lint → verificação automática de estilo e padrões de código.
 Analisador de qualidade (SonarQube) → detecta code smells, vulnerabilidades e pontos de melhoria.
