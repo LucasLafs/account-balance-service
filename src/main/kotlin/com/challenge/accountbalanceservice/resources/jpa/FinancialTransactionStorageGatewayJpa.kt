@@ -13,10 +13,10 @@ class FinancialTransactionStorageGatewayJpa(
 ) : FinancialTransactionStorageGateway {
 
     @Transactional
-    override fun insertOrUpdate(financialTransactions: List<FinancialTransaction>) {
+    override fun upsertAll(financialTransactions: List<FinancialTransaction>) {
         val accountTables = financialTransactions.map { it.account.toTable() }
         val transactionTables = financialTransactions.map { it.transaction.toTable() }
 
-        repository.insertOrUpdate(accountTables, transactionTables)
+        repository.upsertAll(accountTables, transactionTables)
     }
 }

@@ -31,13 +31,13 @@ internal class FinancialTransactionStorageGatewayJpaTest {
         val slotTransactionTable = slot<List<TransactionTable>>()
 
         every {
-            financialTransactionJdbcRepository.insertOrUpdate(
+            financialTransactionJdbcRepository.upsertAll(
                 capture(slotAccountTable),
                 capture(slotTransactionTable)
             )
         } just runs
 
-        assertDoesNotThrow { gateway.insertOrUpdate(financialTransactions) }
+        assertDoesNotThrow { gateway.upsertAll(financialTransactions) }
 
         val slotAccountCaptured = slotAccountTable.captured.single()
         val slotTransactionCaptured = slotTransactionTable.captured.single()
@@ -47,7 +47,7 @@ internal class FinancialTransactionStorageGatewayJpaTest {
         assertEquals(transactionTables.first().accountId, slotAccountCaptured.accountId)
 
         verify(exactly = 1) {
-            financialTransactionJdbcRepository.insertOrUpdate(any(), any())
+            financialTransactionJdbcRepository.upsertAll(any(), any())
         }
     }
 }
