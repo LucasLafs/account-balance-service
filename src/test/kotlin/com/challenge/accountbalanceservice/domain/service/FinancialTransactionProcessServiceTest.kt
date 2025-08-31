@@ -22,11 +22,11 @@ internal class FinancialTransactionProcessServiceTest {
         val financialTransactions = listOf(FinancialTransactionFactory.buildSimpleFixture())
 
         every {
-            financialTransactionStorageGateway.insertOrUpdate(financialTransactions)
+            financialTransactionStorageGateway.upsertAll(financialTransactions)
         } just runs
 
         assertDoesNotThrow { service.process(financialTransactions) }
 
-        verify(exactly = 1) { financialTransactionStorageGateway.insertOrUpdate(any()) }
+        verify(exactly = 1) { financialTransactionStorageGateway.upsertAll(any()) }
     }
 }

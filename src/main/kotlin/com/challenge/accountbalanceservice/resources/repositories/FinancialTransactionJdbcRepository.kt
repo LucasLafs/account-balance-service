@@ -13,7 +13,7 @@ class FinancialTransactionJdbcRepository(
     private val jdbcTemplate: NamedParameterJdbcTemplate,
     private val meterRegistry: MeterRegistry
 ) {
-    fun insertOrUpdate(
+    fun upsertAll(
         accountTables: List<AccountTable>,
         transactionTables: List<TransactionTable>
     ) {

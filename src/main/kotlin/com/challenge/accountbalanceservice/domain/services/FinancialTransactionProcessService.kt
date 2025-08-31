@@ -16,7 +16,7 @@ class FinancialTransactionProcessService(
     fun process(financialTransactions: List<FinancialTransaction>) {
         logger.info("starting financial transaction process.")
 
-        financialTransactionStorageGateway.insertOrUpdate(financialTransactions)
+        financialTransactionStorageGateway.upsertAll(financialTransactions)
 
         logger.info("finishing financial transaction process.")
     }
