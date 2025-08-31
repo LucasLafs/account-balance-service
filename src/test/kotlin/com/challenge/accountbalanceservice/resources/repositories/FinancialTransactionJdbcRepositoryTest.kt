@@ -43,7 +43,7 @@ internal class FinancialTransactionJdbcRepositoryTest {
         } returnsMany listOf(intArrayOf(SUCCESS_NO_INFO, SUCCESS_NO_INFO))
 
         assertDoesNotThrow {
-            financialTransactionJdbcRepository.insertOrUpdate(accountTable, transactionTable)
+            financialTransactionJdbcRepository.upsertAll(accountTable, transactionTable)
         }
 
         verify(exactly = 2) {
